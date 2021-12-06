@@ -16,6 +16,7 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import frc.robot.Constants.AutoConstants;
+import frc.robot.ProportionControl;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutonomousDistance;
