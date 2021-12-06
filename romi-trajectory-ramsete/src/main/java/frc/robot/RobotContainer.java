@@ -20,9 +20,11 @@ import frc.robot.Constants.DriveConstants;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.commands.AutonomousDistance;
 import frc.robot.commands.AutonomousTime;
+import frc.robot.commands.PositionArm;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OnBoardIO;
 import frc.robot.subsystems.OnBoardIO.ChannelMode;
+import frc.robot.subsystems.ServoArm;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.trajectory.Trajectory;
@@ -45,6 +47,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final OnBoardIO m_onboardIO = new OnBoardIO(ChannelMode.INPUT, ChannelMode.INPUT);
+  private final ServoArm m_arm1 = new ServoArm(3);
 
   // Assumes a gamepad plugged into channnel 0
   private final Joystick m_controller = new Joystick(0);
@@ -143,6 +146,8 @@ public class RobotContainer {
     // is scheduled over it.
     m_drivetrain.setDefaultCommand(getArcadeDriveCommand());
 
+    m_arm1.setDefaultCommand(getPositionArmCommand());
+
     // Example of how to use the onboard IO
     Button onboardButtonA = new Button(m_onboardIO::getButtonAPressed);
     onboardButtonA
@@ -175,6 +180,16 @@ public class RobotContainer {
    */
   public Command getArcadeDriveCommand() {
     return new ArcadeDrive(
-        m_drivetrain, () -> -m_controller.getRawAxis(1), () -> m_controller.getRawAxis(2));
+        m_drivetrain, () -> -m_controller.getRawAxis(1), () -> m_controller.getRawAxis(4));
+  }
+
+  public Command getPositionArmCommand() 
+  {
+     double p;
+    if (m_controller.getRawAxis(5) > 0.1) 
+      p = m_controller.getRawAxis(5);
+    else p= 0.0;
+
+    return new PositionArm(m_arm1, p );
   }
 }
