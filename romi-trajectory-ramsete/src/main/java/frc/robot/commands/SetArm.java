@@ -6,22 +6,21 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.ServoArm;
-import java.util.function.Supplier;
+//import java.util.function.Supplier;
 
 
-public class PositionArm extends CommandBase 
+public class SetArm extends CommandBase 
 {
   private final ServoArm m_arm;
   private final  double  m_pos;
+  private boolean m_end = false;
 
-  private final Supplier<Double> m_zaxisRotateSupplier;
 
   /** Creates a new PositionArm. */
-  public PositionArm(ServoArm p_arm,  Supplier<Double> zaxisRotateSuppplier) 
+  public SetArm(ServoArm p_arm, double pos) 
   {
     m_arm = p_arm;
-    m_pos = 0;
-    m_zaxisRotateSupplier = zaxisRotateSuppplier;
+    m_pos = pos;
     addRequirements(m_arm);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -37,17 +36,20 @@ public class PositionArm extends CommandBase
   @Override
   public void execute() 
   {
-    m_arm.setPosition(m_zaxisRotateSupplier.get());
+    m_arm.setPosition(m_pos);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) 
+  {
+    m_end = true;
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() 
   {
-    return false;
+    return m_end;
   }
 }
