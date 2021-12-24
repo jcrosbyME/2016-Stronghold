@@ -16,7 +16,6 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.geometry.Translation2d;
 import frc.robot.Constants.AutoConstants;
-import frc.robot.ProportionControl;
 import frc.robot.Constants.DriveConstants;
 import frc.robot.Constants.mControl;
 import frc.robot.Constants.ArmConstants;
@@ -26,6 +25,7 @@ import frc.robot.commands.AutonomousTime;
 import frc.robot.commands.PositionArm;
 import frc.robot.commands.SetArm;
 import frc.robot.commands.IntakeGB;
+import frc.robot.commands.ExpellGB;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OnBoardIO;
 import frc.robot.subsystems.OnBoardIO.ChannelMode;
@@ -185,6 +185,8 @@ public class RobotContainer {
     m_upper.whenPressed(new SetArm(m_arm1, ArmConstants.kUpper), true);
 
     m_intakeGB.whenPressed(new IntakeGB(m_intake));
+
+    m_expellGB.whenPressed(new ExpellGB(m_intake));
     
     SmartDashboard.putData(m_chooser);
   }

@@ -12,7 +12,7 @@ import java.util.function.Supplier;
 public class PositionArm extends CommandBase 
 {
   private final ServoArm m_arm;
-  private final  double  m_pos;
+  //private final  double  m_pos;
 
   private final Supplier<Double> m_zaxisRotateSupplier;
 
@@ -20,7 +20,7 @@ public class PositionArm extends CommandBase
   public PositionArm(ServoArm p_arm,  Supplier<Double> zaxisRotateSuppplier) 
   {
     m_arm = p_arm;
-    m_pos = 0;
+    //m_pos = 0;
     m_zaxisRotateSupplier = zaxisRotateSuppplier;
     addRequirements(m_arm);
     // Use addRequirements() here to declare subsystem dependencies.
